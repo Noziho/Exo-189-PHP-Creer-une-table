@@ -30,8 +30,6 @@
 // FIXME => Aucun code pour cette partie de l'exo, tout se passe sur PhpMyAdmin.
 
 
-
-
 /**
  * Créez via PhpMyAdmin une nouvelle base de données table_test_php
  * Créez dans cette base de données deux nouvelles tables   utilisateur  ET   produit VIA PHP, en passant par une requête.
@@ -62,6 +60,38 @@
 // TODO Votre code ici.
 
 try {
-    ...
+    $pdo = new PDO("mysql:host=localhost;dbname=table_test_phpmyadmin;charset=utf8", "root", "");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql1 = "
+        CREATE TABLE utilisateur (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            family_name VARCHAR(50) NOT NULL,
+            name VARCHAR(50) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            password VARCHAR(12) NOT NULL,
+            adresse VARCHAR(150) NOT NULL,
+            postal_code TEXT NOT NULL,
+            country VARCHAR(150) NOT NULL,
+            date_join DATETIME DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(email)
+        )
+    ";
+
+    $sql2 = "
+
+            CREATE TABLE produit (
+                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(50) NOT NULL,
+                price FLOAT NOT NULL,
+                description_courte TINYTEXT NOT NULL,
+                description_longue MEDIUMTEXT NOT NULL
+
+        )
+    ";
+    $pdo->exec($sql1);
+    $pdo->exec($sql2);
+    echo "Les deux tables on été crées avec succès.";
 }
-catch...
+catch (PDOException $e) {
+    echo "Echec lors de la création des tables.";
+}
