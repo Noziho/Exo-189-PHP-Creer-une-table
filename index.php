@@ -1,5 +1,6 @@
 <?php
-
+require __DIR__ . '/Config.php';
+require __DIR__ . '/DB_Connect.php';
 /**
  * Créez via PhpMyAdmin une nouvelle base de données table_test_phpmyadmin
  * Toujours via PhpMyAdmin, créez dans cette base de données deux nouvelles tables   utilisateur  ET   produit
@@ -60,8 +61,7 @@
 // TODO Votre code ici.
 
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=table_test_phpmyadmin;charset=utf8", "root", "");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = DB_Connect::dbConnect();
     $sql1 = "
         CREATE TABLE utilisateur (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
