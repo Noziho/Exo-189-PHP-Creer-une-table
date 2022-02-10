@@ -1,8 +1,8 @@
 <?php
 class DB_Connect
 {
-    public static string $dsn = "mysql:host=%s;dbname=%s;charset=%s";
-    public static ?PDO $pdo = null;
+    private static string $dsn = "mysql:host=%s;dbname=%s;charset=%s";
+    private static ?PDO $pdo = null;
 
     public static function dbConnect(): PDO {
         if (self::$pdo === null) {

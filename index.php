@@ -59,10 +59,7 @@ require __DIR__ . '/DB_Connect.php';
  */
 
 // TODO Votre code ici.
-
-try {
-    $pdo = DB_Connect::dbConnect();
-    $sql1 = "
+$sql1 = "
         CREATE TABLE utilisateur (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             family_name VARCHAR(50) NOT NULL,
@@ -77,6 +74,9 @@ try {
         )
     ";
 
+DB_Connect::dbConnect()->exec($sql1);
+
+
     $sql2 = "
 
             CREATE TABLE produit (
@@ -88,10 +88,5 @@ try {
 
         )
     ";
-    $pdo->exec($sql1);
-    $pdo->exec($sql2);
-    echo "Les deux tables on été crées avec succès.";
-}
-catch (PDOException $e) {
-    echo "Echec lors de la création des tables.";
-}
+
+DB_Connect::dbConnect()->exec($sql2);
